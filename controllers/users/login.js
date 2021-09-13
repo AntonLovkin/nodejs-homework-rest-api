@@ -14,7 +14,7 @@ const login = async (req, res, next) => {
 
     const hashPassword = user.password
     const compareResult = bcrypt.compareSync(password, hashPassword)
-    // const compareResult = user.comparePassword(password)
+    
     if (!compareResult) {
       throw new BadRequest('Email or password is wrong')
     }
