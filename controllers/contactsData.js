@@ -2,9 +2,14 @@ const { Contact } = require('../models')
 
 const listContacts = async (req, res, next) => {
   try {
-    const contacts = await Contact.find({})
+    const { page = 1, limit = 2 } = req.query
+    const skip = (page - 1) * limit
+    const result = await Contact.find({}, '', { skip, limit: +limit })
+    const pages = await Contact.find({})
     res.json({
-      contacts
+      total: pages.length,
+      pages: Math.ceil(pages.length / limit),
+      result
     })
   } catch (error) {
     next(error)
