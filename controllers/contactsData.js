@@ -4,11 +4,11 @@ const listContacts = async (req, res, next) => {
   try {
     const { page = 1, limit = 2 } = req.query
     const skip = (page - 1) * limit
+    const total = await Contact.count()
     const result = await Contact.find({}, '', { skip, limit: +limit })
-    const pages = await Contact.find({})
     res.json({
-      total: pages.length,
-      pages: Math.ceil(pages.length / limit),
+      total,
+      pages: Math.ceil(total / limit),
       result
     })
   } catch (error) {
