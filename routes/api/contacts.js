@@ -1,7 +1,7 @@
 const express = require('express')
 
 const { joiContactSchema } = require('../../models/contact')
-const { validation } = require('../../middlewares')
+const { validation, controllerWrapper, upload } = require('../../middlewares')
 
 const ctrl = require('../../controllers/contactsData')
 
@@ -19,5 +19,7 @@ router.put('/:contactId', validationMiddleware, ctrl.updateContact)
 router.delete('/:contactId', ctrl.removeContact)
 
 router.patch('/:contactId/favourite', ctrl.updateStatusContact)
+
+// router.patch('/:contactId', upload.single('image'), controllerWrapper(ctrl.updateImg))
 
 module.exports = router

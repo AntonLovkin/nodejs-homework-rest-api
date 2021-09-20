@@ -20,6 +20,7 @@ const contactSchema = Schema({
     type: SchemaTypes.ObjectId,
     ref: 'user',
   }
+
 }, { versionKey: false, timestamps: true })
 
 const joiContactSchema = Joi.object({
