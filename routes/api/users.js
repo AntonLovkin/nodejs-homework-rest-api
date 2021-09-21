@@ -10,6 +10,10 @@ const userValidationMiddleware = validation(joiSchema)
 
 router.post('/signup', userValidationMiddleware, controllerWrapper(ctrl.signup))
 
+router.get('/verify/:verifyToken', controllerWrapper(ctrl.verify))
+
+router.post('/verify', controllerWrapper(ctrl.verifyReSend))
+
 router.post('/login', userValidationMiddleware, controllerWrapper(ctrl.login))
 
 router.get('/logout', controllerWrapper(authenticate), ctrl.logout)
